@@ -28,3 +28,16 @@ def detail(request, album_id):
     # except Album.DoesNotExist:
     #     raise Http404("Album does not exit")
     return render(request, 'music/detail.html', {'album': album})
+
+
+def favorite(request, album_id):
+    album = get_object_or_404(Album, pk=album_id)
+    try:
+        selected_song = album.song_set.get(pk=request.POST['song'])
+    except(keyError, Song.DoesNotExist):
+        return render(request, 'music/detail.html',
+                      {'album': album, 'error message': "you did not selected a valid song"})
+    else:
+        selected_song.is_favorite = True
+        selected_song.save()
+        return render(request, 'music/detail.html', {'album': album})
