@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <img src="C:\Users\djdac\website\suraj.png">
+    <h1>{{ album.album_title }}</h1>
+    <h3> {{ album.artist }} </h3>
+    <ul>
+        {% for song in album.song_set.all %}
+        <li>
+            {{ song.song_title }} - {{ song.file_type}}
+        </li>
+        {% endfor %}
+    </ul>
+</head>
+<body>
+</body>
+</html>
